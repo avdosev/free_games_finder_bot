@@ -1,12 +1,15 @@
 import requests
 import datetime
 from pprint import pprint
-from game_info import GameData
+from game_info import GameData, GameInformer
 
 
-class EpicGamesStore:
+class EpicGamesStore(GameInformer):
     def __init__(self):
-        res = requests.get('https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ru&country=RU&allowCountries=RU')
+        res = requests.get(
+            'https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=ru&country=RU'
+            '&allowCountries=RU'
+        )
         self.page = res.json()
 
     def get_free_games(self):
@@ -25,7 +28,3 @@ class EpicGamesStore:
 
         free_games = [to_dict(game) for game in free_games if is_active_game(game)]
         return free_games
-
-
-if __name__ == '__main__':
-    print(*EpicGamesStore().get_free_games(), sep='\n')

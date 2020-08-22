@@ -1,8 +1,7 @@
 from game_info import GameData
 from dataclasses import asdict
 import telepot
-
-message = "Игрулька {name} доступна бесплатно [тут]({link})"
+import message_templates
 
 
 class TelegramBot:
@@ -13,6 +12,6 @@ class TelegramBot:
 
     def notify(self, game: GameData):
         print("send response telegram")
-        mes = message.format(**asdict(game))
-        print("Message:", mes)
-        self.bt.sendPhoto(self.chat_id, game.image_url, caption=mes)
+        message = message_templates.game_available_md.format(**asdict(game))
+        print("Message:", message)
+        self.bt.sendPhoto(self.chat_id, game.image_url, caption=message, parse_mode='Markdown')
