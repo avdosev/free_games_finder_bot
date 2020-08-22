@@ -6,7 +6,7 @@ from game_info import GameInformer, GameData
 from storage import Notified
 
 
-if __name__ == '__main__':
+def find_and_notify():
     notified_games = Notified()
     informers: List[GameInformer] = [
         EpicGamesStore()
@@ -20,3 +20,7 @@ if __name__ == '__main__':
             print('Free not notified game: ', free_game)
             tb.notify(free_game)
             notified_games.add(free_game)
+
+
+if __name__ == '__main__':
+    find_and_notify()
