@@ -17,8 +17,7 @@ class EpicGamesStore(GameInformer):
 
         def is_active_game(game):
             promotions = game['promotions']
-            promotional = promotions['promotionalOffers'] if promotions is not None else None
-            return promotional is not None and len(promotional) != 0
+            return promotions is not None and len(promotions['promotionalOffers']) != 0
 
         def to_dict(game):
             return GameData(
